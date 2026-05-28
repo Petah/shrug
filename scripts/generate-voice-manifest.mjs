@@ -11,7 +11,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { SCENES } from "../js/story.js";
+import { SCENES, CHARACTERS } from "../js/story.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = join(root, "assets", "audio");
@@ -31,7 +31,8 @@ for (const [sceneId, scene] of Object.entries(SCENES)) {
   (scene.beats ?? []).forEach((beat, i) => {
     if (!beat.speaker) return; // narration has no voice line
     const key = `${sceneId}:${i}`;
-    lines.push({ key, speaker: beat.speaker, text: beat.text, file: existing[key] ?? "" });
+    const speaker = CHARACTERS[beat.speaker]?.name ?? beat.speaker; // display name
+    lines.push({ key, speaker, text: beat.text, file: existing[key] ?? "" });
   });
 }
 
