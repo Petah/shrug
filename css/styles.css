@@ -311,38 +311,62 @@ html, body {
 /* ── Toasts ─────────────────────────────────────────── */
 .toast-wrap {
   position: fixed;
-  bottom: 24px;
+  top: 44%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 14px;
   align-items: center;
   pointer-events: none;
-  z-index: 50;
+  z-index: 60;
 }
 .toast {
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  padding: 6px 14px;
+  background: rgba(13, 17, 23, 0.88);
+  border: 2px solid var(--line);
+  padding: 14px 30px;
   border-radius: 99px;
-  font-size: 13px;
-  font-weight: 600;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(8px);
-  animation: toast 1.6s ease forwards;
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+  opacity: 0;
+  transform-origin: center;
+  animation: toastPop 1.9s cubic-bezier(0.18, 0.9, 0.32, 1.4) both;
 }
-.toast.up { color: var(--good); border-color: var(--good); }
-.toast.down { color: var(--bad); border-color: var(--bad); }
-@keyframes toast {
-  0% { opacity: 0; transform: translateY(10px); }
-  15% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-12px); }
+.toast.up {
+  color: var(--good);
+  border-color: var(--good);
+  text-shadow: 0 0 22px rgba(78, 201, 122, 0.6);
+}
+.toast.down {
+  color: var(--bad);
+  border-color: var(--bad);
+  text-shadow: 0 0 22px rgba(229, 96, 77, 0.6);
+}
+@keyframes toastPop {
+  0% { opacity: 0; transform: scale(0.4) translateY(14px) rotate(-8deg); }
+  16% { opacity: 1; transform: scale(1.18) translateY(0) rotate(5deg); }
+  28% { transform: scale(0.96) rotate(-3deg); }
+  38% { transform: scale(1.04) rotate(2deg); }
+  48% { transform: scale(1) rotate(0deg); }
+  72% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: scale(1.05) translateY(-70px) rotate(3deg); }
 }
 
-.fade-in { animation: fade 0.35s ease; }
-@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* Animate the inner content only — never the .stage itself, which uses
+   translateX(-50%) to stay centered; animating its transform makes it jump
+   sideways. The content does a quick, smooth fade + rise. */
+.stage.fade-in .scene-body {
+  animation: beatIn 0.18s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+@keyframes beatIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 1100px) {

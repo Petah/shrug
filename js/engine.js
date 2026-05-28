@@ -325,9 +325,12 @@ export class Game {
     if (!parts.length) return;
     const wrap = document.createElement("div");
     wrap.className = "toast-wrap";
-    wrap.innerHTML = parts.map((p) => `<div class="toast ${p.up ? "up" : "down"}">${p.label}</div>`).join("");
+    // Stagger each toast so they cascade in rather than appear all at once.
+    wrap.innerHTML = parts
+      .map((p, i) => `<div class="toast ${p.up ? "up" : "down"}" style="animation-delay:${(i * 0.09).toFixed(2)}s">${p.label}</div>`)
+      .join("");
     this.root.appendChild(wrap);
-    setTimeout(() => wrap.remove(), 1600);
+    setTimeout(() => wrap.remove(), 2000 + parts.length * 90);
   }
 
   // ── Save / load ─────────────────────────────────────────────
