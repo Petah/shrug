@@ -1,0 +1,6 @@
+# Cloudflare Pages config for "As Per My Last Email".
+# Static site — no Functions, no build framework. The build command
+# (npm run build:site) assembles everything into dist/.
+name = "as-per-my-last-email"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-12-01"
