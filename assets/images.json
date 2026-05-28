@@ -102,7 +102,7 @@
     },
     {
       "id": "sprite-priya",
-      "file": "sprite-priya.svg",
+      "file": "gary.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",
@@ -111,7 +111,7 @@
     },
     {
       "id": "sprite-marcus",
-      "file": "sprite-marcus.svg",
+      "file": "brian.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",
@@ -120,7 +120,7 @@
     },
     {
       "id": "sprite-becky",
-      "file": "sprite-becky.svg",
+      "file": "emily.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",
@@ -129,7 +129,7 @@
     },
     {
       "id": "sprite-owen",
-      "file": "sprite-owen.svg",
+      "file": "todd.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",
@@ -138,7 +138,7 @@
     },
     {
       "id": "sprite-dana",
-      "file": "dana.png",
+      "file": "linda.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",
