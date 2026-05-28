@@ -1,7 +1,7 @@
 {
-  "name": "promotion-season",
+  "name": "as-per-my-last-email",
   "version": "0.1.0",
-  "description": "Promotion Season — a narrative choice-based office-sabotage game (game jam: theme \"sabotage\").",
+  "description": "As Per My Last Email — a narrative choice-based office-sabotage game (game jam: theme \"sabotage\").",
   "type": "module",
   "scripts": {
     "placeholders": "node scripts/generate-placeholders.mjs",

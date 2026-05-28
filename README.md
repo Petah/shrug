@@ -1,4 +1,4 @@
-# Promotion Season
+# As Per My Last Email
 
 A narrative, choice-based office-sabotage game. **Game jam theme: sabotage.**
 
@@ -50,22 +50,30 @@ Everything lives in `js/story.js`. A scene looks like:
 
 ```js
 d2_priya: {
-  day: 2, phase: "work", speaker: "priya",
-  title: "Priya asks a favor",
-  body: "Can you review my section before the demo?…",
-  choices: [
+  day: 2, phase: "work",
+  title: "Gary asks a favor",
+  beats: [                                   // played one click at a time
+    { speaker: "priya", text: "Can you review my section before the demo?" },
+    { text: "It is good. Too good." },        // no speaker = narration
+  ],
+  choices: [                                  // shown after the last beat
     {
       text: "Give honest, helpful feedback.",
-      hint: "Priya gets even better. You gain a real ally.",
+      hint: "Gary gets even better. You gain a real ally.",
       effects: { chaos: -1 },         // stat deltas
       rel: { priya: 2 },              // relationship deltas (-5..+5)
-      set: ["helpedPriya"],           // flags to remember
+      set: ["helpedGary"],            // flags to remember
       next: "d2_credit",
       // require: { flag: "..." }     // optional gate; locked choices show why
     },
   ],
 }
 ```
+
+> Internal ids stay stable when you rename a character's display name: the
+> character key (`priya`), relationship key (`rel: { priya }`), and art ids
+> (`portrait-priya`, `sprite-priya`) are independent of the shown name (set in
+> `CHARACTERS[...].name` in `js/story.js`). A spoken beat uses `speaker: "<id>"`.
 
 Gates supported by `require`: `flag`, `notFlag`, `anyFlag`, `minRel: [who, n]`,
 `minAllies`, `minStress`. Endings live in `ENDINGS` and are checked top-to-bottom;

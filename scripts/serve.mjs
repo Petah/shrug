@@ -47,6 +47,6 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Promotion Season running at http://localhost:${port}`);
+  console.log(`As Per My Last Email running at http://localhost:${port}`);
   console.log("Press Ctrl+C to stop.");
 });

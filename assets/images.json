@@ -52,8 +52,8 @@
       "w": 512,
       "h": 512,
       "kind": "portrait",
-      "alt": "Priya, the genuinely competent rival",
-      "description": "Priya: warm, sharp-eyed, put-together but not flashy. Looks like she actually does the work. Holds a prototype/laptop. Genuinely kind smile that makes her hard to sabotage guilt-free."
+      "alt": "Gary, the genuinely competent rival",
+      "description": "Gary: warm, sharp-eyed, put-together but not flashy. Looks like he actually does the work. Holds a prototype/laptop. Genuinely kind smile that makes him hard to sabotage guilt-free."
     },
     {
       "id": "portrait-marcus",
@@ -61,8 +61,8 @@
       "w": 512,
       "h": 512,
       "kind": "portrait",
-      "alt": "Marcus, the credit thief",
-      "description": "Marcus: overly confident, great hair, expensive-looking shirt, mid-gesture as if taking credit for something right now. Big practiced smile, eyes calculating."
+      "alt": "Brian, the credit thief",
+      "description": "Brian: overly confident, great hair, expensive-looking shirt, mid-gesture as if taking credit for something right now. Big practiced smile, eyes calculating."
     },
     {
       "id": "portrait-becky",
@@ -70,8 +70,8 @@
       "w": 512,
       "h": 512,
       "kind": "portrait",
-      "alt": "Becky, the boss's favorite",
-      "description": "Becky: effortlessly social, trophy emoji energy, holds a fancy coffee. Not skilled but utterly untouchable. Slightly bored, slightly amused expression."
+      "alt": "Emily, the boss's favorite",
+      "description": "Emily: effortlessly social, trophy emoji energy, holds a fancy coffee. Not skilled but utterly untouchable. Slightly bored, slightly amused expression."
     },
     {
       "id": "portrait-owen",
@@ -79,8 +79,8 @@
       "w": 512,
       "h": 512,
       "kind": "portrait",
-      "alt": "Owen, the anxious overworker",
-      "description": "Owen: tired, eager-to-please, surrounded by sticky notes, three energy drinks. Will do anything for praise. Slightly hunched, hopeful eyes with dark circles."
+      "alt": "Todd, the anxious overworker",
+      "description": "Todd: tired, eager-to-please, surrounded by sticky notes, three energy drinks. Will do anything for praise. Slightly hunched, hopeful eyes with dark circles."
     },
     {
       "id": "portrait-dana",
@@ -88,8 +88,8 @@
       "w": 512,
       "h": 512,
       "kind": "portrait",
-      "alt": "Dana, the manager",
-      "description": "Dana: composed, observant manager. Reading glasses, arms crossed, the kind of calm that notices patterns. Hates drama, wants results. A look that says she's already three steps ahead of your excuse."
+      "alt": "Linda, the manager",
+      "description": "Linda: composed, observant manager. Reading glasses, arms crossed, the kind of calm that notices patterns. Hates drama, wants results. A look that says she's already three steps ahead of your excuse."
     },
     {
       "id": "sprite-you",
@@ -106,8 +106,8 @@
       "w": 600,
       "h": 900,
       "kind": "sprite",
-      "alt": "Priya — full-body cut-out",
-      "description": "Full-body cut-out of Priya, transparent background, talking pose. Warm, sharp, put-together, holding a laptop/prototype. The competent one you feel guilty sabotaging."
+      "alt": "Gary — full-body cut-out",
+      "description": "Full-body cut-out of Gary, transparent background, talking pose. Warm, sharp, put-together, holding a laptop/prototype. The competent one you feel guilty sabotaging. He actually does the work."
     },
     {
       "id": "sprite-marcus",
@@ -115,8 +115,8 @@
       "w": 600,
       "h": 900,
       "kind": "sprite",
-      "alt": "Marcus — full-body cut-out",
-      "description": "Full-body cut-out of Marcus, transparent background, confident mid-gesture pose as if taking credit. Great hair, expensive shirt, practiced smile, calculating eyes."
+      "alt": "Brian — full-body cut-out",
+      "description": "Full-body cut-out of Brian, transparent background, confident mid-gesture pose as if taking credit. Great hair, expensive shirt, practiced smile, calculating eyes."
     },
     {
       "id": "sprite-becky",
@@ -124,8 +124,8 @@
       "w": 600,
       "h": 900,
       "kind": "sprite",
-      "alt": "Becky — full-body cut-out",
-      "description": "Full-body cut-out of Becky, transparent background, relaxed untouchable pose with a fancy coffee. Effortlessly social, slightly bored, slightly amused — secretly the real saboteur."
+      "alt": "Emily — full-body cut-out",
+      "description": "Full-body cut-out of Emily, transparent background, relaxed untouchable pose with a fancy coffee. Effortlessly social, slightly bored, slightly amused — secretly the real saboteur."
     },
     {
       "id": "sprite-owen",
@@ -133,8 +133,8 @@
       "w": 600,
       "h": 900,
       "kind": "sprite",
-      "alt": "Owen — full-body cut-out",
-      "description": "Full-body cut-out of Owen, transparent background, anxious eager pose clutching an energy drink and sticky notes. Tired, hopeful, hunched, dark circles. Will do anything for praise."
+      "alt": "Todd — full-body cut-out",
+      "description": "Full-body cut-out of Todd, transparent background, anxious eager pose clutching an energy drink and sticky notes. Tired, hopeful, hunched, dark circles. Will do anything for praise."
     },
     {
       "id": "sprite-dana",
@@ -142,8 +142,8 @@
       "w": 600,
       "h": 900,
       "kind": "sprite",
-      "alt": "Dana — full-body cut-out",
-      "description": "Full-body cut-out of Dana the manager, transparent background, composed arms-crossed pose with reading glasses and a notebook. Calm, observant, three steps ahead of your excuse."
+      "alt": "Linda — full-body cut-out",
+      "description": "Full-body cut-out of Linda the manager, transparent background, composed arms-crossed pose with reading glasses and a notebook. Calm, observant, three steps ahead of your excuse."
     }
   ]
 }

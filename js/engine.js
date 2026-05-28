@@ -1,4 +1,4 @@
-// Promotion Season — browser game engine.
+// As Per My Last Email — browser game engine.
 // Renders scenes into the three-panel layout and applies choice effects.
 import { SCENES, ENDINGS, CHARACTERS, STAT_DEFS, START_STATE, INBOX, matches } from "./story.js";
 import { playVoice } from "./audio.js";
@@ -251,7 +251,7 @@ export class Game {
 
   // ── Rendering: side panels ──────────────────────────────────
   renderSidebars(scene) {
-    this.el.dayLabel.textContent = scene.day ? `Day ${scene.day} of 5` : "Promotion Season";
+    this.el.dayLabel.textContent = scene.day ? `Day ${scene.day} of 5` : "As Per My Last Email";
 
     // Inbox (left).
     const msgs = INBOX[scene.day] ?? [];
