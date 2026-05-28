@@ -12,7 +12,7 @@
     },
     {
       "id": "office-bg",
-      "file": "office-bg.svg",
+      "file": "Gemini_Generated_Image_xedp98xedp98xedp.png",
       "w": 1280,
       "h": 720,
       "kind": "scene",
@@ -21,7 +21,7 @@
     },
     {
       "id": "scene-meeting-room",
-      "file": "Gemini_Generated_Image_61truj61truj61tr.png",
+      "file": "Gemini_Generated_Image_kcv4umkcv4umkcv4.png",
       "w": 1280,
       "h": 720,
       "kind": "scene",
@@ -30,7 +30,7 @@
     },
     {
       "id": "scene-kitchen",
-      "file": "scene-kitchen.svg",
+      "file": "Gemini_Generated_Image_61truj61truj61tr.png",
       "w": 1280,
       "h": 720,
       "kind": "scene",
@@ -93,7 +93,7 @@
     },
     {
       "id": "sprite-you",
-      "file": "sprite-you.svg",
+      "file": "you.png",
       "w": 600,
       "h": 900,
       "kind": "sprite",

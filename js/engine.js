@@ -81,6 +81,7 @@ export class Game {
   }
 
   setBg(imageId) {
+    this.bgId = imageId; // remember the visible background (sprites read this)
     const next = IMG(imageId);
     if (this.el.bg.getAttribute("src") === next) return;
     this.el.bg.classList.remove("bg-in");
@@ -219,6 +220,8 @@ export class Game {
     el.src = IMG(speaker.sprite);
     el.alt = speaker.name;
     el.classList.remove("hidden");
+    // In the kitchen, characters stand on the right and face left (mirrored).
+    el.classList.toggle("right", this.bgId === "scene-kitchen");
     if (this._spriteId !== speaker.sprite) {
       el.classList.remove("pop");
       void el.offsetWidth;
