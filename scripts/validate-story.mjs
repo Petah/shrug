@@ -28,11 +28,21 @@ const targets = (scene) => {
   return t;
 };
 
+// 0. Character art references resolve.
+for (const [cid, c] of Object.entries(CHARACTERS)) {
+  if (c.img && !IMG_IDS.has(c.img)) err(`character "${cid}" portrait image "${c.img}" not in manifest`);
+  if (c.sprite && !IMG_IDS.has(c.sprite)) err(`character "${cid}" sprite image "${c.sprite}" not in manifest`);
+}
+
 // 1. Per-scene structural checks.
 for (const [id, scene] of Object.entries(SCENES)) {
   if (!scene.title) warn(`scene "${id}" has no title`);
   if (scene.image && !IMG_IDS.has(scene.image)) err(`scene "${id}" references unknown image "${scene.image}"`);
-  if (scene.speaker && !CHARACTERS[scene.speaker]) err(`scene "${id}" has unknown speaker "${scene.speaker}"`);
+  if (!scene.beats || !scene.beats.length) warn(`scene "${id}" has no beats`);
+  for (const [bi, b] of (scene.beats ?? []).entries()) {
+    if (!b.text) warn(`scene "${id}" beat #${bi + 1} has no text`);
+    if (b.speaker && !CHARACTERS[b.speaker]) err(`scene "${id}" beat #${bi + 1} unknown speaker "${b.speaker}"`);
+  }
   if (!scene.auto && !(scene.choices && scene.choices.length))
     err(`scene "${id}" is a dead end (no auto and no choices)`);
 

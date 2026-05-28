@@ -1,0 +1,9 @@
+{
+  "_comment": "Map each speaker id to a voice clip filename in assets/audio/. Leave a value as \"\" to use the synthesized blip for that character. Example: \"priya\": \"priya.mp3\".",
+  "you": "",
+  "priya": "",
+  "marcus": "",
+  "becky": "",
+  "owen": "",
+  "dana": ""
+}

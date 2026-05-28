@@ -1,8 +1,15 @@
 // Promotion Season — browser game engine.
 // Renders scenes into the three-panel layout and applies choice effects.
 import { SCENES, ENDINGS, CHARACTERS, STAT_DEFS, START_STATE, INBOX, matches } from "./story.js";
+import { playVoice } from "./audio.js";
 
-const IMG = (id) => `assets/images/${id}.svg`;
+// Maps image id -> file path. Populated from assets/images.json via
+// setImageMap() so real art (any extension) can replace the .svg placeholders.
+let IMAGE_FILES = {};
+export function setImageMap(map) {
+  IMAGE_FILES = map || {};
+}
+const IMG = (id) => IMAGE_FILES[id] || `assets/images/${id}.svg`;
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const SAVE_KEY = "promotion-season-save";
 
@@ -11,6 +18,7 @@ export class Game {
     this.root = root;
     this.el = {
       bg: root.querySelector("#scene-bg"),
+      sprite: root.querySelector("#sprite"),
       inbox: root.querySelector("#inbox"),
       stage: root.querySelector("#stage"),
       stats: root.querySelector("#stats"),
@@ -81,29 +89,57 @@ export class Game {
     this.el.bg.classList.add("bg-in");
   }
 
-  // ── Rendering: center stage ─────────────────────────────────
+  // ── Rendering: center stage (beat-by-beat dialogue) ─────────
   renderScene(scene) {
-    const stage = this.el.stage;
-    stage.classList.remove("fade-in");
-    void stage.offsetWidth; // restart CSS animation
-    stage.classList.add("fade-in");
-
     // The scene image is a full-bleed background. Only swap it when the scene
     // specifies one, so work beats keep the day's establishing shot behind them.
     if (scene.image) this.setBg(scene.image);
+    this.scene = scene;
+    this.beats = scene.beats && scene.beats.length ? scene.beats : [{ text: "" }];
+    this.beatIndex = 0;
+    this.renderBeat();
+  }
 
-    const speaker = scene.speaker ? CHARACTERS[scene.speaker] : null;
-    const portrait = speaker
-      ? `<div class="speaker"><img src="${IMG(speaker.img)}" alt="${speaker.name}"><span><b>${speaker.name}</b><i>${speaker.title}</i></span></div>`
-      : "";
-    const body = scene.body
-      .split("\n\n")
-      .map((p) => `<p>${escapeHtml(p)}</p>`)
-      .join("");
+  // Renders the current beat: narration shows plainly; a spoken beat pops the
+  // speaker's cut-out and plays their voice. The last beat reveals the choices
+  // (or the auto-continue), so the player clicks through dialogue first.
+  renderBeat() {
+    const stage = this.el.stage;
+    stage.classList.remove("fade-in");
+    void stage.offsetWidth;
+    stage.classList.add("fade-in");
 
-    let choicesHtml = "";
+    const scene = this.scene;
+    const beat = this.beats[this.beatIndex];
+    const isLast = this.beatIndex >= this.beats.length - 1;
+    const speaker = beat.speaker ? CHARACTERS[beat.speaker] : null;
+
+    this.setSprite(speaker);
+    if (speaker) playVoice({ id: beat.speaker, voice: speaker.voice });
+
+    const nameplate = speaker ? `<div class="nameplate"><b>${escapeHtml(speaker.name)}</b><i>${escapeHtml(speaker.title)}</i></div>` : "";
+    const lineCls = speaker ? "line spoken" : "line narration";
+    const lineHtml = beat.text ? `<p class="${lineCls}">${escapeHtml(beat.text)}</p>` : "";
+
+    const controls = isLast
+      ? this.endControlsHtml(scene)
+      : `<div class="choices"><button class="choice continue" data-next-beat><span class="ctext">Continue ▸</span></button></div>`;
+
+    stage.innerHTML = `
+      <div class="scene-body">
+        <h2>${escapeHtml(scene.title)}</h2>
+        ${nameplate}
+        ${lineHtml}
+        ${controls}
+      </div>`;
+
+    this.wireStage(scene, isLast);
+  }
+
+  // HTML for the controls shown after the final beat: choices, or auto-continue.
+  endControlsHtml(scene) {
     if (scene.choices) {
-      choicesHtml =
+      return (
         `<div class="choices">` +
         scene.choices
           .map((c, i) => {
@@ -116,23 +152,24 @@ export class Game {
             </button>`;
           })
           .join("") +
-        `</div>`;
-    } else if (scene.auto) {
-      const label = scene.phase === "recap" ? "Continue →" : scene.phase === "title" ? "Begin" : "Continue →";
-      choicesHtml = `<div class="choices"><button class="choice continue" data-auto="${scene.auto}">
-        <span class="ctext">${label}</span></button></div>`;
+        `</div>`
+      );
     }
+    if (scene.auto) {
+      const label = scene.phase === "title" ? "Begin" : "Continue →";
+      return `<div class="choices"><button class="choice continue" data-auto="${scene.auto}"><span class="ctext">${label}</span></button></div>`;
+    }
+    return "";
+  }
 
-    stage.innerHTML = `
-      <div class="scene-body">
-        ${portrait}
-        <h2>${escapeHtml(scene.title)}</h2>
-        ${body}
-        ${choicesHtml}
-      </div>`;
-
+  wireStage(scene, isLast) {
+    const stage = this.el.stage;
     stage.querySelectorAll("button.choice").forEach((btn) => {
       btn.addEventListener("click", () => {
+        if (btn.dataset.nextBeat != null) {
+          this.beatIndex++;
+          return this.renderBeat();
+        }
         if (btn.dataset.auto != null) return this.go(btn.dataset.auto);
         const c = scene.choices[Number(btn.dataset.i)];
         if (!c) return;
@@ -141,9 +178,17 @@ export class Game {
       });
     });
 
-    // Number-key shortcuts for choices.
+    // Keyboard: advance beats with Enter/Space; pick choices with number keys.
     this._keyHandler && document.removeEventListener("keydown", this._keyHandler);
     this._keyHandler = (e) => {
+      if (!isLast) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.beatIndex++;
+          this.renderBeat();
+        }
+        return;
+      }
       if (scene.choices) {
         const n = Number(e.key);
         if (n >= 1 && n <= scene.choices.length) {
@@ -160,9 +205,31 @@ export class Game {
     document.addEventListener("keydown", this._keyHandler);
   }
 
+  // Show/hide the speaking character's full-body cut-out, popping on change.
+  setSprite(speaker) {
+    const el = this.el.sprite;
+    if (!el) return;
+    if (!speaker) {
+      el.classList.add("hidden");
+      el.classList.remove("pop");
+      this._spriteId = null;
+      return;
+    }
+    el.src = IMG(speaker.sprite);
+    el.alt = speaker.name;
+    el.classList.remove("hidden");
+    if (this._spriteId !== speaker.sprite) {
+      el.classList.remove("pop");
+      void el.offsetWidth;
+      el.classList.add("pop");
+    }
+    this._spriteId = speaker.sprite;
+  }
+
   renderEnding(ending) {
     document.removeEventListener("keydown", this._keyHandler);
     clearSave();
+    this.setSprite(null);
     const stage = this.el.stage;
     stage.classList.add("fade-in");
     this.setBg(ending.image);

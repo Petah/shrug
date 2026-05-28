@@ -44,6 +44,28 @@ html, body {
 .scene-bg.bg-in { animation: bgfade 0.6s ease; }
 @keyframes bgfade { from { opacity: 0; } to { opacity: 1; } }
 
+/* Speaking-character cut-out, anchored bottom-left, behind the text panel. */
+.sprite {
+  position: absolute;
+  left: clamp(8px, 3vw, 60px);
+  bottom: 0;
+  height: min(82vh, 760px);
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  object-position: bottom;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.sprite.hidden { opacity: 0; transform: translateY(28px); }
+.sprite.pop { animation: spritePop 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.3); }
+@keyframes spritePop {
+  0% { opacity: 0; transform: translateY(48px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* Darkening gradients so overlay text stays readable over any art. */
 .vignette {
   position: absolute;
@@ -51,8 +73,7 @@ html, body {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(to right, rgba(7, 10, 14, 0.85) 0%, rgba(7, 10, 14, 0.15) 28%, rgba(7, 10, 14, 0.15) 70%, rgba(7, 10, 14, 0.85) 100%),
-    linear-gradient(to bottom, rgba(7, 10, 14, 0.75) 0%, rgba(7, 10, 14, 0.05) 22%, rgba(7, 10, 14, 0.5) 70%, rgba(7, 10, 14, 0.92) 100%);
+    linear-gradient(to bottom, rgba(7, 10, 14, 0.45) 0%, rgba(7, 10, 14, 0) 14%, rgba(7, 10, 14, 0) 100%);
 }
 
 /* ── HUD top strip (no bar — floats over art) ───────── */
@@ -93,6 +114,11 @@ html, body {
   backdrop-filter: blur(8px);
 }
 .controls button:hover { border-color: var(--accent); }
+.controls button.toggle.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(242, 166, 73, 0.16);
+}
 
 /* ── Overlay panels ─────────────────────────────────── */
 .panel {
@@ -109,6 +135,7 @@ html, body {
   backdrop-filter: blur(10px);
   overflow-y: auto;
   scrollbar-width: thin;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .panel.left { left: 18px; }
 .panel.right {
@@ -117,6 +144,14 @@ html, body {
   flex-direction: column;
   gap: 18px;
 }
+/* Two stacked right panels so Stats and Coworkers can be open at once. */
+.panel.right-top { top: 64px; bottom: auto; max-height: min(46vh, 420px); }
+.panel.right-bottom { top: auto; bottom: 18px; max-height: min(40vh, 360px); }
+
+/* Hidden state: slide off-screen and disable interaction. */
+.panel.hidden { opacity: 0; pointer-events: none; }
+.panel.left.hidden { transform: translateX(-115%); }
+.panel.right.hidden { transform: translateX(115%); }
 .panel h3 {
   margin: 0 0 10px;
   font-size: 12px;
@@ -132,7 +167,7 @@ html, body {
   left: 50%;
   bottom: 22px;
   transform: translateX(-50%);
-  width: min(680px, calc(100vw - 640px));
+  width: min(740px, calc(100vw - 48px));
   max-height: calc(100vh - 96px);
   overflow-y: auto;
   background: var(--panel);
@@ -146,17 +181,30 @@ html, body {
 .scene-body h2 { margin: 6px 0 14px; font-size: 26px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
 .scene-body p { margin: 0 0 12px; color: #e3eaf2; }
 
-.speaker { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-.speaker img {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--accent);
+/* Speaker nameplate above a spoken line. */
+.nameplate {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 2px 0 8px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #1a1300;
+  border-radius: 8px;
 }
-.speaker span { display: flex; flex-direction: column; line-height: 1.2; }
-.speaker b { font-size: 15px; }
-.speaker i { font-size: 12px; color: var(--ink-dim); font-style: normal; }
+.nameplate b { font-size: 15px; }
+.nameplate i { font-size: 12px; font-style: normal; opacity: 0.8; }
+
+/* Dialogue lines. */
+.line { margin: 0 0 12px; }
+.line.narration { color: #cdd7e2; font-style: italic; }
+.line.spoken {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.55;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+}
 
 /* ── Choices ────────────────────────────────────────── */
 .choices { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
@@ -312,6 +360,7 @@ html, body {
     max-height: none;
     bottom: auto;
   }
-  .hud-top { position: sticky; background: rgba(7, 10, 14, 0.6); backdrop-filter: blur(8px); }
+  .hud-top { position: sticky; background: rgba(7, 10, 14, 0.6); backdrop-filter: blur(8px); flex-wrap: wrap; }
   .scene-bg, .vignette { position: fixed; }
+  .panel.hidden { display: none; }
 }

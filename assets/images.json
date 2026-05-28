@@ -3,12 +3,12 @@
   "images": [
     {
       "id": "title",
-      "file": "title.svg",
+      "file": "Gemini_Generated_Image_jlop1ajlop1ajlop.png",
       "w": 1280,
       "h": 720,
       "kind": "scene",
-      "alt": "Promotion Season title screen",
-      "description": "Title art: a sleek open-plan office at golden hour. A single empty corner office with a glass door glows invitingly at the back. Foreground desks have subtle signs of sabotage (a swapped nameplate, a hidden marker, a calendar with a moved meeting). Game logo 'PROMOTION SEASON' in confident corporate sans-serif, with a tagline 'Can you win without becoming the worst person in the room?'"
+      "alt": "As per my last email title screen",
+      "description": "Title art: a sleek open-plan office at golden hour. A single empty corner office with a glass door glows invitingly at the back. Foreground desks have subtle signs of sabotage (a swapped nameplate, a hidden marker, a calendar with a moved meeting). Game logo 'As per my last email' in confident corporate sans-serif, with a tagline 'Can you win without becoming the worst person in the room?'"
     },
     {
       "id": "office-bg",
@@ -90,6 +90,60 @@
       "kind": "portrait",
       "alt": "Dana, the manager",
       "description": "Dana: composed, observant manager. Reading glasses, arms crossed, the kind of calm that notices patterns. Hates drama, wants results. A look that says she's already three steps ahead of your excuse."
+    },
+    {
+      "id": "sprite-you",
+      "file": "sprite-you.svg",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "You — full-body cut-out",
+      "description": "Full-body character cut-out of the player, transparent background, standing/gesturing pose for the visual-novel dialogue popup. Ambiguous ambitious employee, smart-casual, lanyard with blank badge. Readable as either sincere or scheming."
+    },
+    {
+      "id": "sprite-priya",
+      "file": "sprite-priya.svg",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "Priya — full-body cut-out",
+      "description": "Full-body cut-out of Priya, transparent background, talking pose. Warm, sharp, put-together, holding a laptop/prototype. The competent one you feel guilty sabotaging."
+    },
+    {
+      "id": "sprite-marcus",
+      "file": "sprite-marcus.svg",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "Marcus — full-body cut-out",
+      "description": "Full-body cut-out of Marcus, transparent background, confident mid-gesture pose as if taking credit. Great hair, expensive shirt, practiced smile, calculating eyes."
+    },
+    {
+      "id": "sprite-becky",
+      "file": "sprite-becky.svg",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "Becky — full-body cut-out",
+      "description": "Full-body cut-out of Becky, transparent background, relaxed untouchable pose with a fancy coffee. Effortlessly social, slightly bored, slightly amused — secretly the real saboteur."
+    },
+    {
+      "id": "sprite-owen",
+      "file": "sprite-owen.svg",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "Owen — full-body cut-out",
+      "description": "Full-body cut-out of Owen, transparent background, anxious eager pose clutching an energy drink and sticky notes. Tired, hopeful, hunched, dark circles. Will do anything for praise."
+    },
+    {
+      "id": "sprite-dana",
+      "file": "dana.png",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "Dana — full-body cut-out",
+      "description": "Full-body cut-out of Dana the manager, transparent background, composed arms-crossed pose with reading glasses and a notebook. Calm, observant, three steps ahead of your excuse."
     }
   ]
 }

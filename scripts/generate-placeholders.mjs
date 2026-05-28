@@ -16,6 +16,7 @@ const outDir = join(root, "assets", "images");
 const PALETTE = {
   scene: { bg: "#1f2a3a", accent: "#3b5170", text: "#dbe4f0", tag: "#5b7aa8" },
   portrait: { bg: "#2a2230", accent: "#5a3f63", text: "#efe1f0", tag: "#9a6fae" },
+  sprite: { bg: "#102826", accent: "#1f5a4f", text: "#dbf3ec", tag: "#3fae93" },
 };
 
 function esc(s) {
@@ -86,13 +87,21 @@ async function main() {
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   await mkdir(outDir, { recursive: true });
   let count = 0;
+  let skipped = 0;
   for (const img of manifest.images) {
+    // Only write .svg placeholders. A non-svg `file` means real art has been
+    // dropped in — never overwrite it.
+    if (!img.file.toLowerCase().endsWith(".svg")) {
+      skipped++;
+      console.log(`  – ${img.file.padEnd(40)} (real art — skipped)`);
+      continue;
+    }
     const out = join(outDir, img.file);
     await writeFile(out, svgFor(img), "utf8");
     count++;
-    console.log(`  ✓ ${img.file.padEnd(28)} (${img.w}×${img.h})`);
+    console.log(`  ✓ ${img.file.padEnd(40)} (${img.w}×${img.h})`);
   }
-  console.log(`\nGenerated ${count} placeholder(s) into assets/images/`);
+  console.log(`\nGenerated ${count} placeholder(s)${skipped ? `, skipped ${skipped} real asset(s)` : ""} in assets/images/`);
 }
 
 main().catch((e) => {

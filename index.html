@@ -12,22 +12,29 @@
     <main id="game" class="layout">
       <img id="scene-bg" class="scene-bg" alt="" />
       <div class="vignette"></div>
+      <img id="sprite" class="sprite hidden" alt="" />
 
       <div class="hud-top">
         <div class="brand">PROMOTION&nbsp;SEASON</div>
         <div id="day-label" class="day-label"></div>
         <div class="controls">
+          <button class="toggle" data-target="inbox">✉ Inbox</button>
+          <button class="toggle" data-target="stats-panel">★ Stats</button>
+          <button class="toggle" data-target="rel-panel">🤝 Coworkers</button>
           <button id="btn-resume" hidden>Resume</button>
           <button id="btn-restart">Restart</button>
         </div>
       </div>
 
-      <aside id="inbox" class="panel left"></aside>
+      <aside id="inbox" class="panel left hidden"></aside>
 
       <section id="stage" class="stage"></section>
 
-      <aside class="panel right">
+      <aside id="stats-panel" class="panel right right-top hidden">
         <div id="stats"></div>
+      </aside>
+
+      <aside id="rel-panel" class="panel right right-bottom hidden">
         <div id="relationships"></div>
       </aside>
     </main>

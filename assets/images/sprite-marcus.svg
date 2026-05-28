@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900" role="img" aria-label="Marcus — full-body cut-out">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102826"/>
+      <stop offset="1" stop-color="#1f5a4f"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1f5a4f" stroke-opacity="0.25" stroke-width="1"/>
+    </pattern>
+    <style>
+      .tag  { font: 700 24px system-ui, sans-serif; fill: #dbf3ec; letter-spacing: 2px; }
+      .id   { font: 800 38px system-ui, sans-serif; fill: #dbf3ec; }
+      .desc { font: 400 19px system-ui, sans-serif; fill: #dbf3ec; fill-opacity: 0.85; }
+      .meta { font: 500 16px ui-monospace, monospace; fill: #dbf3ec; fill-opacity: 0.6; }
+    </style>
+  </defs>
+  <rect width="600" height="900" fill="url(#g)"/>
+  <rect width="600" height="900" fill="url(#grid)"/>
+  <rect x="6" y="6" width="588" height="888" fill="none" stroke="#3fae93" stroke-width="3" stroke-dasharray="14 10"/>
+  <text x="48" y="75" class="tag">PLACEHOLDER · SPRITE</text>
+  <text x="48" y="270" class="id">sprite-marcus</text>
+  <text x="48" y="378" class="desc">Full-body cut-out of Marcus, transparent</text>
+    <text x="48" y="405" class="desc">background, confident mid-gesture pose as if</text>
+    <text x="48" y="432" class="desc">taking credit. Great hair, expensive shirt,</text>
+    <text x="48" y="459" class="desc">practiced smile, calculating eyes.</text>
+  <text x="48" y="852" class="meta">600×900 · replace with real art</text>
+</svg>
