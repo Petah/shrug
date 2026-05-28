@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Promotion Season title screen">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f2a3a"/>
+      <stop offset="1" stop-color="#3b5170"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#3b5170" stroke-opacity="0.25" stroke-width="1"/>
+    </pattern>
+    <style>
+      .tag  { font: 700 29px system-ui, sans-serif; fill: #dbe4f0; letter-spacing: 2px; }
+      .id   { font: 800 45px system-ui, sans-serif; fill: #dbe4f0; }
+      .desc { font: 400 23px system-ui, sans-serif; fill: #dbe4f0; fill-opacity: 0.85; }
+      .meta { font: 500 19px ui-monospace, monospace; fill: #dbe4f0; fill-opacity: 0.6; }
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+  <rect x="6" y="6" width="1268" height="708" fill="none" stroke="#5b7aa8" stroke-width="3" stroke-dasharray="14 10"/>
+  <text x="58" y="90" class="tag">PLACEHOLDER · SCENE</text>
+  <text x="58" y="216" class="id">title</text>
+  <text x="58" y="302" class="desc">Title art: a sleek open-plan office at golden hour. A single empty corner office with a glass door</text>
+    <text x="58" y="334" class="desc">glows invitingly at the back. Foreground desks have subtle signs of sabotage (a swapped nameplate,</text>
+    <text x="58" y="366" class="desc">a hidden marker, a calendar with a moved meeting). Game logo 'PROMOTION SEASON' in confident</text>
+    <text x="58" y="398" class="desc">corporate sans-serif, with a tagline 'Can you win without becoming the worst person in the room?'</text>
+  <text x="58" y="662" class="meta">1280×720 · replace with real art</text>
+</svg>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Promotion Season</title>
+    <meta name="description" content="A narrative choice-based office-sabotage game. Can you win without becoming the worst person in the room?" />
+    <link rel="icon" href="assets/images/portrait-you.svg" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main id="game" class="layout">
+      <img id="scene-bg" class="scene-bg" alt="" />
+      <div class="vignette"></div>
+
+      <div class="hud-top">
+        <div class="brand">PROMOTION&nbsp;SEASON</div>
+        <div id="day-label" class="day-label"></div>
+        <div class="controls">
+          <button id="btn-resume" hidden>Resume</button>
+          <button id="btn-restart">Restart</button>
+        </div>
+      </div>
+
+      <aside id="inbox" class="panel left"></aside>
+
+      <section id="stage" class="stage"></section>
+
+      <aside class="panel right">
+        <div id="stats"></div>
+        <div id="relationships"></div>
+      </aside>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

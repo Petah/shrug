@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="The player character">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2230"/>
+      <stop offset="1" stop-color="#5a3f63"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#5a3f63" stroke-opacity="0.25" stroke-width="1"/>
+    </pattern>
+    <style>
+      .tag  { font: 700 21px system-ui, sans-serif; fill: #efe1f0; letter-spacing: 2px; }
+      .id   { font: 800 32px system-ui, sans-serif; fill: #efe1f0; }
+      .desc { font: 400 17px system-ui, sans-serif; fill: #efe1f0; fill-opacity: 0.85; }
+      .meta { font: 500 14px ui-monospace, monospace; fill: #efe1f0; fill-opacity: 0.6; }
+    </style>
+  </defs>
+  <rect width="512" height="512" fill="url(#g)"/>
+  <rect width="512" height="512" fill="url(#grid)"/>
+  <rect x="6" y="6" width="500" height="500" fill="none" stroke="#9a6fae" stroke-width="3" stroke-dasharray="14 10"/>
+  <text x="41" y="64" class="tag">PLACEHOLDER · PORTRAIT</text>
+  <text x="41" y="154" class="id">portrait-you</text>
+  <text x="41" y="215" class="desc">Player portrait: deliberately</text>
+    <text x="41" y="238" class="desc">ambiguous, ambitious mid-level</text>
+    <text x="41" y="261" class="desc">employee. Neutral pleasant expression</text>
+    <text x="41" y="284" class="desc">that could read as sincere OR scheming</text>
+    <text x="41" y="307" class="desc">depending on context. Lanyard with a</text>
+    <text x="41" y="330" class="desc">blank badge.</text>
+  <text x="41" y="471" class="meta">512×512 · replace with real art</text>
+</svg>

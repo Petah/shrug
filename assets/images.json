@@ -1,0 +1,95 @@
+{
+  "_comment": "Manifest of every image the game uses. `node scripts/generate-placeholders.mjs` reads this and writes an SVG placeholder for each entry into assets/images/<id>.svg, stamped with the description so you know what to draw. Replace the SVGs with real art later (keep the same filename, or change `file` here).",
+  "images": [
+    {
+      "id": "title",
+      "file": "title.svg",
+      "w": 1280,
+      "h": 720,
+      "kind": "scene",
+      "alt": "Promotion Season title screen",
+      "description": "Title art: a sleek open-plan office at golden hour. A single empty corner office with a glass door glows invitingly at the back. Foreground desks have subtle signs of sabotage (a swapped nameplate, a hidden marker, a calendar with a moved meeting). Game logo 'PROMOTION SEASON' in confident corporate sans-serif, with a tagline 'Can you win without becoming the worst person in the room?'"
+    },
+    {
+      "id": "office-bg",
+      "file": "office-bg.svg",
+      "w": 1280,
+      "h": 720,
+      "kind": "scene",
+      "alt": "Open-plan office background",
+      "description": "Neutral open-plan office background used behind scenes. Rows of desks, a glass meeting room, a whiteboard, plants, big windows. Slightly muted so foreground text/cards read clearly. Mild fluorescent-corporate vibe."
+    },
+    {
+      "id": "scene-meeting-room",
+      "file": "scene-meeting-room.svg",
+      "w": 1280,
+      "h": 720,
+      "kind": "scene",
+      "alt": "Glass meeting room",
+      "description": "A glass-walled meeting room with a long table, a wall display showing a half-finished slide deck, scattered laptops and coffee cups. Used for demo/review scenes."
+    },
+    {
+      "id": "scene-kitchen",
+      "file": "scene-kitchen.svg",
+      "w": 1280,
+      "h": 720,
+      "kind": "scene",
+      "alt": "Office kitchen / breakout area",
+      "description": "Office kitchen / breakout area: coffee machine, communal snacks, a passive-aggressive sticky note on the fridge. The natural habitat of rumors. Used for gossip/alliance scenes."
+    },
+    {
+      "id": "portrait-you",
+      "file": "portrait-you.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "The player character",
+      "description": "Player portrait: deliberately ambiguous, ambitious mid-level employee. Neutral pleasant expression that could read as sincere OR scheming depending on context. Lanyard with a blank badge."
+    },
+    {
+      "id": "portrait-priya",
+      "file": "portrait-priya.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "Priya, the genuinely competent rival",
+      "description": "Priya: warm, sharp-eyed, put-together but not flashy. Looks like she actually does the work. Holds a prototype/laptop. Genuinely kind smile that makes her hard to sabotage guilt-free."
+    },
+    {
+      "id": "portrait-marcus",
+      "file": "portrait-marcus.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "Marcus, the credit thief",
+      "description": "Marcus: overly confident, great hair, expensive-looking shirt, mid-gesture as if taking credit for something right now. Big practiced smile, eyes calculating."
+    },
+    {
+      "id": "portrait-becky",
+      "file": "portrait-becky.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "Becky, the boss's favorite",
+      "description": "Becky: effortlessly social, trophy emoji energy, holds a fancy coffee. Not skilled but utterly untouchable. Slightly bored, slightly amused expression."
+    },
+    {
+      "id": "portrait-owen",
+      "file": "portrait-owen.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "Owen, the anxious overworker",
+      "description": "Owen: tired, eager-to-please, surrounded by sticky notes, three energy drinks. Will do anything for praise. Slightly hunched, hopeful eyes with dark circles."
+    },
+    {
+      "id": "portrait-dana",
+      "file": "portrait-dana.svg",
+      "w": 512,
+      "h": 512,
+      "kind": "portrait",
+      "alt": "Dana, the manager",
+      "description": "Dana: composed, observant manager. Reading glasses, arms crossed, the kind of calm that notices patterns. Hates drama, wants results. A look that says she's already three steps ahead of your excuse."
+    }
+  ]
+}
