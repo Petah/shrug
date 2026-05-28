@@ -115,7 +115,7 @@ export class Game {
     const speaker = beat.speaker ? CHARACTERS[beat.speaker] : null;
 
     this.setSprite(speaker);
-    if (speaker) playVoice({ id: beat.speaker, voice: speaker.voice });
+    if (speaker) playVoice({ key: `${this.current}:${this.beatIndex}`, voice: speaker.voice });
 
     const nameplate = speaker ? `<div class="nameplate"><b>${escapeHtml(speaker.name)}</b><i>${escapeHtml(speaker.title)}</i></div>` : "";
     const lineCls = speaker ? "line spoken" : "line narration";

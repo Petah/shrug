@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "placeholders": "node scripts/generate-placeholders.mjs",
+    "voices": "node scripts/generate-voice-manifest.mjs",
     "validate": "node scripts/validate-story.mjs",
-    "build": "npm run placeholders && npm run validate",
+    "build": "npm run placeholders && npm run voices && npm run validate",
     "serve": "node scripts/serve.mjs",
     "start": "npm run placeholders && npm run serve"
   },

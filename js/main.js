@@ -17,17 +17,17 @@ try {
   /* fall back to <id>.svg defaults */
 }
 
-// Optional: real voice clips. Drop files in assets/audio/ and map speaker id ->
-// file in assets/audio/voices.json (e.g. {"priya":"priya.mp3"}). Missing file =
-// synthesized blip. Safe to omit entirely.
+// Optional: real voice clips, one per spoken line. assets/audio/voices.json
+// lists every line with a "key" ("sceneId:beatIndex") and a "file". Fill in the
+// file to play a clip for that line; leave it "" for the synthesized blip.
+// Regenerate the list with `npm run voices` after editing story content.
 try {
   const res = await fetch("assets/audio/voices.json");
   if (res.ok) {
-    const map = await res.json();
+    const manifest = await res.json();
     const resolved = {};
-    for (const [id, file] of Object.entries(map)) {
-      if (id.startsWith("_") || !file) continue; // skip _comment and empty entries
-      resolved[id] = `assets/audio/${file}`;
+    for (const line of manifest.lines ?? []) {
+      if (line.file) resolved[line.key] = `assets/audio/${line.file}`;
     }
     registerVoiceFiles(resolved);
   }

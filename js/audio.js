@@ -5,7 +5,7 @@
 // missing or can't play).
 
 let ctx = null;
-const fileMap = {}; // speakerId -> url
+const fileMap = {}; // lineKey ("sceneId:beatIndex") -> url
 
 // Must be (re)tried from a user gesture; browsers block audio before that.
 function ensureCtx() {
@@ -50,20 +50,22 @@ function blip(freq) {
   }
 }
 
-// Play a spoken line's sound. speaker = { id, voice }.
-export function playVoice(speaker) {
-  const url = fileMap[speaker.id];
+// Play a spoken line's sound. line = { key, voice }.
+// If a real clip is registered for this exact line key, play it; otherwise fall
+// back to a synthesized blip at the character's pitch.
+export function playVoice(line) {
+  const url = line.key && fileMap[line.key];
   if (url) {
     try {
       const a = new Audio(url);
       a.volume = 0.9;
-      a.play().catch(() => blip(speaker.voice || 260));
+      a.play().catch(() => blip(line.voice || 260));
       return;
     } catch {
       /* fall through to synth */
     }
   }
-  blip(speaker.voice || 260);
+  blip(line.voice || 260);
 }
 
 // A soft non-voice tick for narration / continue, optional.

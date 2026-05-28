@@ -1,22 +1,34 @@
 # Voice / SFX
 
 By default the game **synthesizes** a short voice "blip" per spoken line using
-the Web Audio API — no files needed, each character has a different pitch
+the Web Audio API — no files needed. Each character has a different pitch
 (set via `voice` in `js/story.js`).
 
-To use **real voice clips** instead, drop audio files here and create
-`assets/audio/voices.json` mapping a speaker id to a filename:
+To use **real recordings**, note that **every spoken line has its own clip** —
+not one per character. The list of lines lives in `voices.json`, generated from
+the story:
 
-```json
-{
-  "priya": "priya.mp3",
-  "marcus": "marcus.mp3",
-  "becky": "becky.mp3",
-  "owen": "owen.mp3",
-  "dana": "dana.mp3",
-  "you": "you.mp3"
-}
+```bash
+npm run voices   # (re)generate voices.json from js/story.js
 ```
 
-Any missing entry falls back to the synthesized blip, so you can add them one at
-a time. Short clips (0.3–1s) work best as per-line "voice" cues.
+Each entry looks like:
+
+```json
+{ "key": "d1_morning:1", "speaker": "dana",
+  "text": "One of you will be promoted…", "file": "" }
+```
+
+Record the clip, drop it in this folder, and put its filename in `file`:
+
+```json
+{ "key": "d1_morning:1", "speaker": "dana",
+  "text": "One of you will be promoted…", "file": "dana-line-01.mp3" }
+```
+
+- `key` is `sceneId:beatIndex` — leave it as generated; it's how the engine
+  matches a clip to a line.
+- Any line with `"file": ""` falls back to the synth blip, so you can add voices
+  one at a time.
+- Re-running `npm run voices` **keeps the filenames you've already set**, adds
+  entries for new lines, and drops lines that no longer exist.
