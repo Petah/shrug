@@ -1,7 +1,7 @@
 // As Per My Last Email — browser game engine.
 // Renders scenes into the three-panel layout and applies choice effects.
 import { SCENES, ENDINGS, CHARACTERS, STAT_DEFS, START_STATE, INBOX, matches } from "./story.js";
-import { playVoice } from "./audio.js";
+import { playVoice, stopVoice } from "./audio.js";
 
 // Maps image id -> file path. Populated from assets/images.json via
 // setImageMap() so real art (any extension) can replace the .svg placeholders.
@@ -104,6 +104,7 @@ export class Game {
   // speaker's cut-out and plays their voice. The last beat reveals the choices
   // (or the auto-continue), so the player clicks through dialogue first.
   renderBeat() {
+    stopVoice(); // cut off the previous line's sound before showing this beat
     const stage = this.el.stage;
     stage.classList.remove("fade-in");
     void stage.offsetWidth;
@@ -229,6 +230,7 @@ export class Game {
   renderEnding(ending) {
     document.removeEventListener("keydown", this._keyHandler);
     clearSave();
+    stopVoice();
     this.setSprite(null);
     const stage = this.el.stage;
     stage.classList.add("fade-in");
