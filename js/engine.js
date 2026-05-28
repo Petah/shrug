@@ -106,6 +106,7 @@ export class Game {
   // (or the auto-continue), so the player clicks through dialogue first.
   renderBeat() {
     stopVoice(); // cut off the previous line's sound before showing this beat
+    this.closePanels(); // advancing the story closes any open panel
     const stage = this.el.stage;
     stage.classList.remove("fade-in");
     void stage.offsetWidth;
@@ -207,6 +208,13 @@ export class Game {
     document.addEventListener("keydown", this._keyHandler);
   }
 
+  // Close any open HUD panel (Inbox/Stats/Coworkers) and clear button states.
+  // Called on every story advance so panels don't linger over the next beat.
+  closePanels() {
+    document.querySelectorAll(".panel").forEach((p) => p.classList.add("hidden"));
+    document.querySelectorAll(".toggle.active").forEach((b) => b.classList.remove("active"));
+  }
+
   // Show/hide the speaking character's full-body cut-out, popping on change.
   setSprite(speaker) {
     const el = this.el.sprite;
@@ -234,6 +242,7 @@ export class Game {
     document.removeEventListener("keydown", this._keyHandler);
     clearSave();
     stopVoice();
+    this.closePanels();
     this.setSprite(null);
     const stage = this.el.stage;
     stage.classList.add("fade-in");
@@ -256,7 +265,7 @@ export class Game {
 
   // ── Rendering: side panels ──────────────────────────────────
   renderSidebars(scene) {
-    this.el.dayLabel.textContent = scene.day ? `Day ${scene.day} of 5` : "As Per My Last Email";
+    this.el.dayLabel.textContent = scene.day ? `Day ${scene.day} of 5` : "";
 
     // Inbox (left).
     const msgs = INBOX[scene.day] ?? [];

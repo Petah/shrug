@@ -39,21 +39,21 @@ const root = document.querySelector("#game");
 const game = new Game(root);
 window.__game = game; // handy for debugging in the console
 
-const hasSave = !!localStorage.getItem("promotion-season-save");
-const resumeBtn = document.querySelector("#btn-resume");
-if (hasSave) resumeBtn.hidden = false;
-
-resumeBtn?.addEventListener("click", () => game.load());
 document.querySelector("#btn-restart")?.addEventListener("click", () => {
   if (confirm("Restart from Day 1? Your current run will be lost.")) game.reset();
 });
 
-// Panel toggles: each button shows/hides its target overlay panel.
-document.querySelectorAll(".toggle").forEach((btn) => {
+// Panel toggles: only one panel open at a time (opening one closes the rest).
+const toggles = [...document.querySelectorAll(".toggle")];
+toggles.forEach((btn) => {
   const panel = document.getElementById(btn.dataset.target);
   if (!panel) return;
   btn.addEventListener("click", () => {
-    const open = panel.classList.toggle("hidden") === false;
-    btn.classList.toggle("active", open);
+    const willOpen = panel.classList.contains("hidden");
+    game.closePanels(); // close everything first
+    if (willOpen) {
+      panel.classList.remove("hidden");
+      btn.classList.add("active");
+    }
   });
 });

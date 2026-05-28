@@ -15,28 +15,27 @@
       <img id="sprite" class="sprite hidden" alt="" />
 
       <div class="hud-top">
-        <div class="brand">AS PER MY LAST EMAIL</div>
         <div id="day-label" class="day-label"></div>
         <div class="controls">
           <button class="toggle" data-target="inbox">✉ Inbox</button>
           <button class="toggle" data-target="stats-panel">★ Stats</button>
           <button class="toggle" data-target="rel-panel">🤝 Coworkers</button>
-          <button id="btn-resume" hidden>Resume</button>
-          <button id="btn-restart">Restart</button>
         </div>
       </div>
 
-      <aside id="inbox" class="panel left hidden"></aside>
+      <aside id="inbox" class="panel hidden"></aside>
 
       <section id="stage" class="stage"></section>
 
-      <aside id="stats-panel" class="panel right right-top hidden">
+      <aside id="stats-panel" class="panel hidden">
         <div id="stats"></div>
       </aside>
 
-      <aside id="rel-panel" class="panel right right-bottom hidden">
+      <aside id="rel-panel" class="panel hidden">
         <div id="relationships"></div>
       </aside>
+
+      <button id="btn-restart" class="restart-btn">Restart</button>
     </main>
 
     <script type="module" src="js/main.js"></script>

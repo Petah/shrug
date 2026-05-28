@@ -39,7 +39,7 @@
     },
     {
       "id": "portrait-you",
-      "file": "portrait-you.svg",
+      "file": "you-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",
@@ -48,7 +48,7 @@
     },
     {
       "id": "portrait-priya",
-      "file": "portrait-priya.svg",
+      "file": "gary-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",
@@ -57,7 +57,7 @@
     },
     {
       "id": "portrait-marcus",
-      "file": "portrait-marcus.svg",
+      "file": "brian-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",
@@ -66,7 +66,7 @@
     },
     {
       "id": "portrait-becky",
-      "file": "portrait-becky.svg",
+      "file": "emily-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",
@@ -75,7 +75,7 @@
     },
     {
       "id": "portrait-owen",
-      "file": "portrait-owen.svg",
+      "file": "todd-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",
@@ -84,7 +84,7 @@
     },
     {
       "id": "portrait-dana",
-      "file": "portrait-dana.svg",
+      "file": "linda-portrait.png",
       "w": 512,
       "h": 512,
       "kind": "portrait",

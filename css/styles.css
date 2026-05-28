@@ -105,13 +105,12 @@ html, body {
   font-size: 15px;
 }
 .day-label {
-  margin-left: auto;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
   font-weight: 600;
 }
-.controls { display: flex; gap: 8px; }
+.controls { display: flex; gap: 8px; margin-left: auto; }
 .controls button {
   background: var(--panel-2);
   color: var(--ink);
@@ -129,13 +128,39 @@ html, body {
   background: rgba(242, 166, 73, 0.16);
 }
 
+/* Transparent Restart button, bottom-right. */
+.restart-btn {
+  position: absolute;
+  z-index: 5;
+  right: 18px;
+  bottom: 16px;
+  background: transparent;
+  color: var(--ink-dim);
+  border: 1px solid rgba(120, 140, 165, 0.35);
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.restart-btn:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 /* ── Overlay panels ─────────────────────────────────── */
+/* All panels share one slot at the top-right; only one is open at a time. */
 .panel {
   position: absolute;
   z-index: 4;
-  top: 64px;
-  bottom: 18px;
-  width: 290px;
+  top: 60px;
+  right: 18px;
+  left: auto;
+  width: min(320px, calc(100vw - 36px));
+  max-height: calc(100vh - 80px);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -146,21 +171,9 @@ html, body {
   scrollbar-width: thin;
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
-.panel.left { left: 18px; }
-.panel.right {
-  right: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-/* Two stacked right panels so Stats and Coworkers can be open at once. */
-.panel.right-top { top: 64px; bottom: auto; max-height: min(46vh, 420px); }
-.panel.right-bottom { top: auto; bottom: 18px; max-height: min(40vh, 360px); }
 
-/* Hidden state: slide off-screen and disable interaction. */
-.panel.hidden { opacity: 0; pointer-events: none; }
-.panel.left.hidden { transform: translateX(-115%); }
-.panel.right.hidden { transform: translateX(115%); }
+/* Hidden state: slide off to the right and disable interaction. */
+.panel.hidden { opacity: 0; pointer-events: none; transform: translateX(115%); }
 .panel h3 {
   margin: 0 0 10px;
   font-size: 12px;
