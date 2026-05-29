@@ -28,8 +28,35 @@ filesystem in most browsers; if yours blocks `file://` modules, use `npm run ser
 | --- | --- |
 | `npm run placeholders` | Regenerates an SVG placeholder for every entry in `assets/images.json`, each stamped with a description of the art to draw. |
 | `npm run validate` | Validates the story graph: no dangling links, unknown images/speakers, bad stat keys, or unreachable scenes. |
+| `npm run voices` | Regenerates `assets/audio/voices.json` (one entry per spoken line), preserving filenames you've set. |
 | `npm run serve` | Static file server at `http://localhost:5173`. |
-| `npm run build` | `placeholders` + `validate`. |
+| `npm run build` | `placeholders` + `voices` + `validate`. |
+| `npm run build:site` | `build`, then assembles the deployable site into `dist/`. |
+| `npm run deploy` | `build:site`, then `wrangler deploy` (Worker Static Assets). |
+
+## Deploy (Cloudflare Worker — Static Assets)
+
+The game is a static site hosted as a **Worker with Static Assets** (no Worker
+script — the Worker just serves the files in `dist/`). The build regenerates
+assets, validates the story graph, warns about any manifest file missing on
+disk, and copies the runtime files (`index.html`, `css/`, `js/`, `assets/`) into
+`dist/`. `wrangler.toml` sets the Worker name, account, and `[assets].directory`.
+
+```bash
+npx wrangler login        # first time only (or set CLOUDFLARE_API_TOKEN)
+npm run deploy            # builds dist/ and runs `wrangler deploy`
+```
+
+`npm run deploy` runs `wrangler deploy`; the Worker name (`aspermylastemail`) and
+account come from `wrangler.toml`. The site goes live at
+`aspermylastemail.<your-subdomain>.workers.dev`. `npx` fetches Wrangler on demand.
+
+**Custom domain:** dashboard → Workers & Pages → `aspermylastemail` → Settings →
+Domains & Routes → Add custom domain. Not stored in the repo.
+
+> Note: this is a *Worker*, not a *Pages* project — so use `wrangler deploy`, not
+> `wrangler pages deploy`. The latter looks for a Pages project of the same name
+> and reports it "doesn't exist".
 
 ## Project layout
 

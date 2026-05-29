@@ -63,7 +63,8 @@ html, body {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 /* Kitchen: stand on the right, mirrored to face into the scene. */
-.sprite.right {
+.sprite.right,
+.sprite.winner {
   --flip: -1;
   left: auto;
   right: clamp(8px, 3vw, 60px);

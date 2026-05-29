@@ -29,6 +29,10 @@ export const CHARACTERS = {
   dana: { name: "Linda", img: "portrait-dana", sprite: "sprite-dana", title: "Your Manager", voice: 250 },
 };
 
+// The CEO / big boss who hands out the promotion at the very end. Kept out of
+// CHARACTERS on purpose so he doesn't appear in the Coworkers panel.
+export const BOSS = { name: "The CEO", sprite: "sprite-boss", title: "The Big Boss", voice: 150 };
+
 export const STAT_DEFS = [
   { key: "reputation", label: "Reputation", icon: "★", hint: "How competent and promotable you seem.", max: 10 },
   { key: "suspicion", label: "Suspicion", icon: "👁", hint: "How much people think you cause problems.", max: 10 },
@@ -424,51 +428,62 @@ export const ENDINGS = [
     body:
       "The project collapses under its own chaos. The CEO leaves early. The demo is quietly cancelled “pending a retro.”\n\n" +
       "No one is promoted. The role is “put on hold.” You all keep your jobs, technically, in the smoking crater you made together.",
+    congrats: "Congratulations to… absolutely no one. The role's on hold while we 'realign.' Wonderful work, team. Truly.",
   },
   {
     id: "scapegoat",
     title: "Scapegoat",
     image: "scene-meeting-room",
+    winner: "marcus",
     when: (s) => s.stats.suspicion >= 7 && s.stats.allies < 2,
     body:
       "Too many fingerprints, too few friends. The week's every mishap gets quietly filed under your name.\n\n" +
       "You're not fired. You're worse than fired — you're managed. Brian gets the promotion and immediately takes credit for surviving the crisis. You take the blame for things you didn't even do.",
+    congrats: "Brian! Senior Project Lead. Steady hands when it all hit the fan — that's leadership. Congratulations, son.",
   },
   {
     id: "hero",
     title: "Office Hero",
     image: "scene-kitchen",
+    winner: "priya",
     when: (s) => s.stats.reputation >= 6 && s.stats.allies >= 3 && s.stats.suspicion <= 3 && s.rel.priya >= 2,
     body:
       "You stopped scheming and started helping, and somehow that worked. The team rallies. Gary gets the promotion — and his first act is to carve out a lead role for you because he trusts you completely.\n\n" +
       "No corner office yet. But you're the person everyone wants in the room. That compounds.",
+    congrats: "Gary — the promotion's yours. Best work on the team and everyone knows it. Congratulations, richly deserved.",
   },
   {
     id: "clean",
     title: "Clean Promotion",
     image: "title",
+    winner: "you",
     when: (s) => s.stats.reputation >= 6 && s.stats.suspicion <= 3 && s.stats.chaos <= 6,
     body:
       "High reputation, low suspicion, just enough chaos to sink your rivals without sinking the ship. Linda names you Senior Project Lead.\n\n" +
       "Nobody suspects a thing. You played the room, kept your hands clean, and won on what looks exactly like merit. The best ending — and the most dangerous person in the room is now you.",
+    congrats: "Congratulations — Senior Project Lead. Cleanest performance I've seen all week. I don't know how you did it, and frankly I don't want to.",
   },
   {
     id: "pyrrhic",
     title: "Pyrrhic Promotion",
     image: "scene-meeting-room",
+    winner: "you",
     when: (s) => s.stats.reputation >= 5,
     body:
       "You get the title. You also get a team that knows exactly how you got it.\n\n" +
       "Congratulations, Senior Project Lead. Enjoy your one-on-ones with people who count their fingers after shaking your hand. You won. The room is colder now.",
+    congrats: "Congratulations on the promotion! Results speak for themselves. The team will… come around. They always do. Probably.",
   },
   {
     id: "saboteur",
     title: "The Real Saboteur",
     image: "office-bg",
+    winner: "becky",
     when: () => true, // fallback
     body:
       "The promotion goes to Emily. Of course it does. She engineered the whole season — the moved meetings, the rumors, the convenient build break — to keep the rest of you fighting while she stayed pristine.\n\n" +
       "You were never the saboteur in this story. You were the experiment. As everyone files out, Emily catches your eye and winks. “Good game,” she mouths. Season's over.",
+    congrats: "Emily! Senior Project Lead. Everyone else imploded and you just… sailed right through. Whatever you've got, I want more of it. Congratulations.",
   },
 ];
 

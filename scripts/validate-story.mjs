@@ -6,7 +6,7 @@
 import { readFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { SCENES, ENDINGS, CHARACTERS, STAT_DEFS } from "../js/story.js";
+import { SCENES, ENDINGS, CHARACTERS, BOSS, STAT_DEFS } from "../js/story.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const STAT_KEYS = new Set(STAT_DEFS.map((s) => s.key));
@@ -33,6 +33,7 @@ for (const [cid, c] of Object.entries(CHARACTERS)) {
   if (c.img && !IMG_IDS.has(c.img)) err(`character "${cid}" portrait image "${c.img}" not in manifest`);
   if (c.sprite && !IMG_IDS.has(c.sprite)) err(`character "${cid}" sprite image "${c.sprite}" not in manifest`);
 }
+if (BOSS?.sprite && !IMG_IDS.has(BOSS.sprite)) err(`BOSS sprite image "${BOSS.sprite}" not in manifest`);
 
 // 1. Per-scene structural checks.
 for (const [id, scene] of Object.entries(SCENES)) {
@@ -66,6 +67,7 @@ if (!ENDINGS.length) err("no endings defined");
 for (const e of ENDINGS) {
   if (typeof e.when !== "function") err(`ending "${e.id}" has no when() function`);
   if (e.image && !IMG_IDS.has(e.image)) err(`ending "${e.id}" references unknown image "${e.image}"`);
+  if (e.winner && !CHARACTERS[e.winner]) err(`ending "${e.id}" winner "${e.winner}" is not a known character`);
 }
 if (ENDINGS.length && ENDINGS.at(-1).when() !== true)
   warn("last ending is not an unconditional fallback — some stat combos may produce no ending");

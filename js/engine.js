@@ -1,6 +1,6 @@
 // As Per My Last Email — browser game engine.
 // Renders scenes into the three-panel layout and applies choice effects.
-import { SCENES, ENDINGS, CHARACTERS, STAT_DEFS, START_STATE, INBOX, matches } from "./story.js";
+import { SCENES, ENDINGS, CHARACTERS, BOSS, STAT_DEFS, START_STATE, INBOX, matches } from "./story.js";
 import { playVoice, stopVoice } from "./audio.js";
 
 // Maps image id -> file path. Populated from assets/images.json via
@@ -19,6 +19,7 @@ export class Game {
     this.el = {
       bg: root.querySelector("#scene-bg"),
       sprite: root.querySelector("#sprite"),
+      spriteRight: root.querySelector("#sprite-right"),
       inbox: root.querySelector("#inbox"),
       stage: root.querySelector("#stage"),
       stats: root.querySelector("#stats"),
@@ -95,6 +96,7 @@ export class Game {
     // The scene image is a full-bleed background. Only swap it when the scene
     // specifies one, so work beats keep the day's establishing shot behind them.
     if (scene.image) this.setBg(scene.image);
+    this.setWinner(null); // only shown on the ending screen
     this.scene = scene;
     this.beats = scene.beats && scene.beats.length ? scene.beats : [{ text: "" }];
     this.beatIndex = 0;
@@ -238,27 +240,60 @@ export class Game {
     this._spriteId = speaker.sprite;
   }
 
+  // The promotion winner's cut-out, shown on the right at the ending (or hidden).
+  setWinner(charId) {
+    const el = this.el.spriteRight;
+    if (!el) return;
+    const c = charId && CHARACTERS[charId];
+    if (!c) {
+      el.classList.add("hidden");
+      el.classList.remove("pop");
+      this._winnerId = null;
+      return;
+    }
+    el.src = IMG(c.sprite);
+    el.alt = c.name;
+    el.classList.remove("hidden");
+    if (this._winnerId !== c.sprite) {
+      el.classList.remove("pop");
+      void el.offsetWidth;
+      el.classList.add("pop");
+    }
+    this._winnerId = c.sprite;
+  }
+
   renderEnding(ending) {
     document.removeEventListener("keydown", this._keyHandler);
     clearSave();
     stopVoice();
     this.closePanels();
-    this.setSprite(null);
     const stage = this.el.stage;
     stage.classList.add("fade-in");
     this.setBg(ending.image);
+
+    // The boss appears on the left to congratulate the winner, who stands on the right.
+    this.setSprite(BOSS);
+    this.el.sprite.classList.remove("right"); // boss always centered-left, even in the kitchen ending
+    this.setWinner(ending.winner); // null (e.g. Wasteland) hides the right sprite
+
     const body = ending.body.split("\n\n").map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+    const congrats = ending.congrats
+      ? `<div class="nameplate"><b>${escapeHtml(BOSS.name)}</b><i>${escapeHtml(BOSS.title)}</i></div>
+         <p class="line spoken">${escapeHtml(ending.congrats)}</p>`
+      : "";
     const s = this.state.stats;
     stage.innerHTML = `
       <div class="scene-body ending">
         <div class="ending-tag">ENDING</div>
         <h2>${escapeHtml(ending.title)}</h2>
         ${body}
+        ${congrats}
         <div class="final-stats">
           Reputation ${s.reputation} · Suspicion ${s.suspicion} · Allies ${s.allies} · Chaos ${s.chaos}
         </div>
         <div class="choices"><button class="choice continue" id="replay"><span class="ctext">↺ Play again</span></button></div>
       </div>`;
+    if (ending.congrats) playVoice({ key: `ending:${ending.id}`, voice: BOSS.voice });
     stage.querySelector("#replay").addEventListener("click", () => this.reset());
     this.renderSidebars({ day: 5 });
   }

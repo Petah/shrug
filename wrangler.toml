@@ -1,6 +1,9 @@
-# Cloudflare Pages config for "As Per My Last Email".
-# Static site — no Functions, no build framework. The build command
-# (npm run build:site) assembles everything into dist/.
-name = "as-per-my-last-email"
-pages_build_output_dir = "dist"
+# Cloudflare Worker (Static Assets) for "As Per My Last Email".
+# Static site served directly by a Worker via the [assets] binding — there is no
+# Worker script, just the files in dist/. Deploy with `npx wrangler deploy`.
+name = "aspermylastemail"
 compatibility_date = "2024-12-01"
+account_id = "e9ea836c3e39a16b1f26cf463a1568ff"
+
+[assets]
+directory = "./dist"

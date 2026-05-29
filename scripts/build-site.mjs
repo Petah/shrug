@@ -4,12 +4,38 @@
 // the validator before this (see `npm run build:site`).
 //
 // Usage: node scripts/build-site.mjs
-import { rm, mkdir, cp, stat } from "node:fs/promises";
+import { rm, mkdir, cp, stat, readFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
+
+// Warn (don't fail) if the manifest references art/audio files that aren't on
+// disk — those would 404 on the deployed site.
+async function checkReferenced() {
+  const missing = [];
+  try {
+    const imgs = JSON.parse(await readFile(join(root, "assets", "images.json"), "utf8"));
+    for (const img of imgs.images) {
+      await stat(join(root, "assets", "images", img.file)).catch(() => missing.push(`assets/images/${img.file} (id: ${img.id})`));
+    }
+  } catch {
+    /* no manifest */
+  }
+  try {
+    const voices = JSON.parse(await readFile(join(root, "assets", "audio", "voices.json"), "utf8"));
+    for (const line of voices.lines ?? []) {
+      if (line.file) await stat(join(root, "assets", "audio", line.file)).catch(() => missing.push(`assets/audio/${line.file} (line: ${line.key})`));
+    }
+  } catch {
+    /* no manifest */
+  }
+  for (const m of missing) console.warn(`  ⚠ referenced file not found: ${m}`);
+  if (missing.length) console.warn(`  ⚠ ${missing.length} referenced file(s) missing — they'll 404 on the live site.`);
+}
+
+await checkReferenced();
 
 // Everything the running game references, relative to repo root.
 const INCLUDE = ["index.html", "css", "js", "assets"];

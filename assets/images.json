@@ -144,6 +144,15 @@
       "kind": "sprite",
       "alt": "Linda — full-body cut-out",
       "description": "Full-body cut-out of Linda the manager, transparent background, composed arms-crossed pose with reading glasses and a notebook. Calm, observant, three steps ahead of your excuse."
+    },
+    {
+      "id": "sprite-boss",
+      "file": "boss.png",
+      "w": 600,
+      "h": 900,
+      "kind": "sprite",
+      "alt": "The CEO — full-body cut-out",
+      "description": "Full-body cut-out of the CEO / big boss, transparent background, expansive congratulatory pose (open arms or handshake offered). Expensive suit, slightly out-of-touch warmth, the person who hands out the promotion at the end."
     }
   ]
 }

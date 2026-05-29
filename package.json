@@ -11,7 +11,7 @@
     "build:site": "npm run build && node scripts/build-site.mjs",
     "serve": "node scripts/serve.mjs",
     "start": "npm run placeholders && npm run serve",
-    "deploy": "npm run build:site && wrangler pages deploy dist"
+    "deploy": "npm run build:site && npx wrangler deploy"
   },
   "engines": {
     "node": ">=18"
